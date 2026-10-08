@@ -1,0 +1,240 @@
+{
+  "data": {
+    "train": 8002,
+    "validation": 2001,
+    "test": 3080,
+    "intents": 77,
+    "train_per_intent_min": 28,
+    "train_per_intent_max": 149,
+    "test_exact_overlap_with_train": 25
+  },
+  "comparison": [
+    {
+      "model": "logistic regression (word+char)",
+      "val_accuracy": 0.915,
+      "val_macro_f1": 0.9153,
+      "fit_seconds": 19.4259,
+      "predict_ms_per_query": 0.0876
+    },
+    {
+      "model": "linear SVM (word+char)",
+      "val_accuracy": 0.908,
+      "val_macro_f1": 0.9062,
+      "fit_seconds": 2.9019,
+      "predict_ms_per_query": 0.0936
+    },
+    {
+      "model": "SGD modified huber",
+      "val_accuracy": 0.8956,
+      "val_macro_f1": 0.8944,
+      "fit_seconds": 2.8265,
+      "predict_ms_per_query": 0.0963
+    },
+    {
+      "model": "linear SVM (char only)",
+      "val_accuracy": 0.8921,
+      "val_macro_f1": 0.8899,
+      "fit_seconds": 1.9915,
+      "predict_ms_per_query": 0.0615
+    },
+    {
+      "model": "linear SVM (word only)",
+      "val_accuracy": 0.8851,
+      "val_macro_f1": 0.883,
+      "fit_seconds": 0.6686,
+      "predict_ms_per_query": 0.0154
+    },
+    {
+      "model": "ridge classifier",
+      "val_accuracy": 0.8571,
+      "val_macro_f1": 0.8524,
+      "fit_seconds": 11.9541,
+      "predict_ms_per_query": 0.1031
+    },
+    {
+      "model": "kNN cosine (k=5)",
+      "val_accuracy": 0.8211,
+      "val_macro_f1": 0.8186,
+      "fit_seconds": 0.6525,
+      "predict_ms_per_query": 0.4588
+    },
+    {
+      "model": "complement NB (word)",
+      "val_accuracy": 0.7686,
+      "val_macro_f1": 0.757,
+      "fit_seconds": 0.1632,
+      "predict_ms_per_query": 0.0144
+    },
+    {
+      "model": "majority class",
+      "val_accuracy": 0.019,
+      "val_macro_f1": 0.0005,
+      "fit_seconds": 0.1962,
+      "predict_ms_per_query": 0.0107
+    }
+  ],
+  "winner": "logistic regression (word+char)",
+  "best_by_validation": "logistic regression (word+char)",
+  "test": {
+    "accuracy": 0.9113636363636364,
+    "macro_f1": 0.9116547681460628,
+    "top3_accuracy": 0.974025974025974,
+    "temperature": 0.764495342167052,
+    "ece_raw_softmax": 0.056902749501268536,
+    "ece_temperature_scaled": 0.013636435326427172,
+    "worst_intents": {
+      "pending_transfer": 0.75,
+      "balance_not_updated_after_bank_transfer": 0.775,
+      "fiat_currency_support": 0.775,
+      "top_up_failed": 0.8,
+      "topping_up_by_card": 0.8
+    },
+    "intents_at_100pct": 11,
+    "accuracy_ci95": [
+      0.9016233766233767,
+      0.9211038961038961
+    ]
+  },
+  "confused_pairs": [
+    {
+      "pair": "unable_to_verify_identity <-> why_verify_identity",
+      "errors": 8
+    },
+    {
+      "pair": "balance_not_updated_after_bank_transfer <-> transfer_not_received_by_recipient",
+      "errors": 7
+    },
+    {
+      "pair": "verify_my_identity <-> why_verify_identity",
+      "errors": 7
+    },
+    {
+      "pair": "pending_top_up <-> top_up_failed",
+      "errors": 6
+    },
+    {
+      "pair": "top_up_failed <-> top_up_reverted",
+      "errors": 6
+    },
+    {
+      "pair": "balance_not_updated_after_bank_transfer <-> transfer_timing",
+      "errors": 5
+    },
+    {
+      "pair": "card_arrival <-> card_delivery_estimate",
+      "errors": 5
+    },
+    {
+      "pair": "exchange_via_app <-> fiat_currency_support",
+      "errors": 5
+    },
+    {
+      "pair": "card_not_working <-> pin_blocked",
+      "errors": 4
+    },
+    {
+      "pair": "get_physical_card <-> pin_blocked",
+      "errors": 4
+    }
+  ],
+  "routing": {
+    "threshold": 0.65,
+    "auto_routed_share": 0.9006493506493507,
+    "auto_routed_accuracy": 0.9581831290555155,
+    "human_queue_share": 0.0993506493506493,
+    "accuracy_of_human_queue_if_machine_guessed": 0.4869281045751634,
+    "cost_per_query_gated": 0.42003246753246753,
+    "cost_per_query_all_human": 1.5000000000000002,
+    "cost_per_query_all_auto": 0.5818181818181818,
+    "annual_saving_vs_all_human": 1079967.5324675327,
+    "annual_saving_ci95": [
+      1039116.0714285718,
+      1121956.574675325
+    ],
+    "annual_saving_vs_all_auto": 161785.71428571426,
+    "assumptions": {
+      "auto_route": 0.05,
+      "human_triage": 1.2,
+      "misroute": 6.0,
+      "human_accuracy": 0.95,
+      "queries_per_year": 1000000
+    }
+  },
+  "audit": {
+    "flagged_in_train_plus_val": 189,
+    "flagged_share": 0.018894331700489854,
+    "flagged_in_train_part": 148,
+    "val_accuracy_original": 0.9150424787606197,
+    "val_accuracy_after_dropping_flagged": 0.9115442278860569,
+    "test_accuracy_original": 0.9113636363636364,
+    "test_accuracy_after_dropping_flagged": 0.9087662337662338,
+    "intent_pairs_most_flagged": {
+      "pending_top_up -> top_up_failed": 13,
+      "card_arrival -> card_delivery_estimate": 10,
+      "top_up_failed -> top_up_reverted": 9,
+      "unable_to_verify_identity -> why_verify_identity": 8,
+      "unable_to_verify_identity -> verify_my_identity": 7
+    },
+    "test_flagged": 52,
+    "test_errors_lr": 273,
+    "test_errors_also_flagged": 52,
+    "test_accuracy_excluding_flagged_rows": 0.9270145310435931
+  },
+  "typo_stress": {
+    "rates": [
+      0.0,
+      0.03,
+      0.06,
+      0.1,
+      0.15
+    ],
+    "word only": [
+      0.8831168831168831,
+      0.8012987012987013,
+      0.7227272727272728,
+      0.6025974025974026,
+      0.49642857142857144
+    ],
+    "char only": [
+      0.8954545454545455,
+      0.8805194805194805,
+      0.8633116883116884,
+      0.8298701298701299,
+      0.7818181818181819
+    ],
+    "word + char": [
+      0.910064935064935,
+      0.8834415584415585,
+      0.8519480519480519,
+      0.800974025974026,
+      0.7422077922077922
+    ]
+  },
+  "learning_curve": {
+    "examples_per_intent": [
+      5,
+      10,
+      20,
+      104
+    ],
+    "linear SVM (word+char)": [
+      0.6011904761904762,
+      0.7179653679653679,
+      0.8015151515151514,
+      0.910064935064935
+    ],
+    "linear SVM (word only)": [
+      0.5229437229437229,
+      0.6471861471861472,
+      0.7424242424242425,
+      0.8831168831168831
+    ],
+    "complement NB (word)": [
+      0.4623376623376623,
+      0.5504329004329005,
+      0.6332251082251082,
+      0.7633116883116883
+    ]
+  },
+  "runtime_seconds": 230.9
+}
